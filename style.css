@@ -1,0 +1,60 @@
+:root {
+  --board: #dde5ec; --ink: #172033; --muted: #5d6879; --paper: #fff;
+  --lost: #c8352e; --mark: #ffd84d; --found: #1f8a5b; --claim: #2d5bd0; --grey: #8a93a0;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--board); color: var(--ink); font: 16px/1.5 "Instrument Sans", system-ui, sans-serif; }
+h1, h2, h3, .reward { font-family: "Bricolage Grotesque", "Instrument Sans", system-ui, sans-serif; line-height: 1.1; margin: 0; }
+h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; }
+h2 { font-size: 1.4rem; font-weight: 800; }
+.muted { color: var(--muted); font-size: .9rem; }
+
+.top { display: flex; flex-wrap: wrap; gap: 1rem 2rem; justify-content: space-between; align-items: flex-end; max-width: 1100px; margin: 0 auto; padding: 2rem 1rem 1rem; }
+.top p { margin: .5rem 0 0; max-width: 46ch; }
+.wallet { text-align: right; }
+.wallet .muted { margin: .4rem 0 0; }
+
+.layout { display: grid; grid-template-columns: 300px 1fr; gap: 1.5rem; max-width: 1100px; margin: 0 auto; padding: 1rem; align-items: start; }
+@media (max-width: 760px) { .layout { grid-template-columns: 1fr; } .wallet { text-align: left; } }
+
+.panel { background: var(--paper); border-radius: 6px; padding: 1.25rem; position: sticky; top: 1rem; border-top: 8px solid var(--mark); }
+@media (max-width: 760px) { .panel { position: static; } }
+form { display: grid; gap: .8rem; margin-top: 1rem; }
+label { display: grid; gap: .25rem; font-weight: 600; font-size: .9rem; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+input, textarea, select { font: inherit; padding: .5rem .6rem; border: 1.5px solid #b9c3cf; border-radius: 4px; background: #fff; color: var(--ink); width: 100%; }
+select { width: auto; }
+:focus-visible { outline: 3px solid var(--claim); outline-offset: 2px; }
+
+.btn { font: inherit; font-weight: 600; padding: .6rem 1rem; border: 1.5px solid var(--ink); border-radius: 4px; background: #fff; color: var(--ink); cursor: pointer; }
+.btn:hover { background: var(--mark); }
+.btn.primary { background: var(--ink); color: #fff; }
+.btn.primary:hover { background: var(--claim); }
+.btn.small { padding: .3rem .6rem; font-size: .85rem; }
+
+.board-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: .5rem; flex-wrap: wrap; }
+.board { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+
+.flyer { --c: var(--lost); background: var(--paper); border-radius: 4px; border-top: 8px solid var(--c); box-shadow: 0 2px 0 rgba(23, 32, 51, .18); transform: rotate(-.5deg); display: flex; flex-direction: column; }
+.flyer:nth-child(even) { transform: rotate(.5deg); }
+.flyer.s-claimed { --c: var(--claim); }
+.flyer.s-returned { --c: var(--found); }
+.flyer.s-cancelled { --c: var(--grey); }
+.flyer .body { padding: 1rem 1rem .8rem; flex: 1; }
+.flyer h3 { font-size: 1.5rem; font-weight: 800; margin: .5rem 0; overflow-wrap: anywhere; }
+.flyer p { margin: .3rem 0; overflow-wrap: anywhere; }
+.stamp { display: inline-block; padding: .1rem .6rem; border: 2px solid var(--c); color: var(--c); font-weight: 600; border-radius: 3px; }
+
+.tab { position: relative; border-top: 2px dashed var(--c); padding: 1rem; background: color-mix(in srgb, var(--c) 8%, #fff); }
+.tab::before, .tab::after { content: ""; position: absolute; top: -11px; width: 20px; height: 20px; border-radius: 50%; background: var(--board); }
+.tab::before { left: -10px; }
+.tab::after { right: -10px; }
+.reward { font-size: 1.6rem; font-weight: 800; display: block; margin-bottom: .5rem; }
+.role { display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; margin-top: .4rem; }
+.role > span { width: 4.8rem; font-size: .8rem; color: var(--muted); }
+
+#toasts { position: fixed; right: 1rem; bottom: 1rem; display: grid; gap: .5rem; max-width: min(420px, calc(100vw - 2rem)); z-index: 10; }
+.toast { background: var(--ink); color: #fff; padding: .7rem .9rem; border-radius: 4px; border-left: 6px solid var(--mark); overflow-wrap: anywhere; }
+.toast.ok { border-color: var(--found); }
+.toast.error { border-color: var(--lost); }
+.toast a { color: var(--mark); }

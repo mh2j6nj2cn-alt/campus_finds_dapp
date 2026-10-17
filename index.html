@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campus Finds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Campus Finds</h1>
+    <p>Post a lost item with a reward. The ETH stays locked in the contract until you confirm the item is back with you.</p>
+  </div>
+  <div class="wallet">
+    <button id="connectBtn" class="btn primary">Connect MetaMask</button>
+    <p id="walletInfo" class="muted">Not connected</p>
+  </div>
+</header>
+
+<main class="layout">
+  <aside class="panel">
+    <h2>Report a lost item</h2>
+    <form id="reportForm">
+      <label>Item <input id="title" type="text" placeholder="Blue Casio calculator"></label>
+      <label>Last seen at <input id="location" type="text" placeholder="Library, second floor"></label>
+      <label>Details <textarea id="description" rows="3" placeholder="Name written inside the cover"></textarea></label>
+      <div class="row">
+        <label>Reward (ETH) <input id="reward" type="text" inputmode="decimal" value="0.01"></label>
+        <label>Open for (days) <input id="days" type="text" inputmode="numeric" value="14"></label>
+      </div>
+      <button class="btn primary" type="submit">Lock reward and post</button>
+    </form>
+    <p id="rules" class="muted"></p>
+  </aside>
+
+  <section>
+    <div class="board-head">
+      <h2>Notice board</h2>
+      <div>
+        <select id="filter" aria-label="Filter by status">
+          <option value="all">All reports</option>
+          <option value="0">Open</option>
+          <option value="1">Claimed</option>
+          <option value="2">Returned</option>
+          <option value="3">Cancelled</option>
+        </select>
+        <button id="refreshBtn" class="btn small">Refresh</button>
+      </div>
+    </div>
+    <div id="board" class="board"><p class="muted">Connect MetaMask to load the board.</p></div>
+  </section>
+</main>
+
+<div id="toasts" aria-live="polite"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
